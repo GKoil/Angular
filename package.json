@@ -1,6 +1,4 @@
 {
-  "name": "g-mate-front",
-  "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "backend": "cd ./backend/ && npm run start",
