@@ -1,3 +1,6 @@
+install:
+	npm i
+
 backend:
 	cd ./backend/ && npm run start
 
