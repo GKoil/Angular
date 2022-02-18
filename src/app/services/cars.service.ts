@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Car } from './car.type';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CarsService {
-  items = [];
-
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   getCars() {
-    return this.http.get<{id: number, name: string, model: {id: number, name: string}, color: string, year: number, image: string}[]>('http://localhost:3000/cars');
+    return this.http.get<Car[]>('http://localhost:3000/cars');
   }
 }
