@@ -21,6 +21,12 @@
     <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <app-card></app-card>
     </section>
+
+    <div *ngFor='let car of cars'>
+      {{car.name}}
+      <img src='http://localhost:3000/images/{{car.image}}' alt='Изображение машины: {{car.name}}'>
+      <button (click)='removeCar(car.id)'>remove</button>
+    </div>
   </div>
 </main>
 
