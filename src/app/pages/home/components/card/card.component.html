@@ -1,4 +1,6 @@
-<article class="col">
+<div *ngIf="!cardInfo">Не получилось загрузить</div>
+
+<article *ngIf="cardInfo" class="col">
   <div class="card shadow-sm">
     <img
       class="image bd-placeholder-img card-img-top"

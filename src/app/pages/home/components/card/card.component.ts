@@ -7,6 +7,5 @@ import { Car } from '@services/car.type';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
-  // @ts-ignore
-  @Input() cardInfo: Car;
+  @Input() cardInfo: Car | undefined;
 }
