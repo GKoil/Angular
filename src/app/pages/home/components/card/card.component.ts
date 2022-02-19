@@ -10,6 +10,8 @@ import { CarsService } from '@services/cars.service';
 export class CardComponent {
   isDialogOpened = false;
 
+  isDialogUpdateOpen = false;
+
   @Input() cardInfo: Car | undefined;
 
   @Output() removeCar: EventEmitter<number> = new EventEmitter<number>();
@@ -30,5 +32,9 @@ export class CardComponent {
       }
     ),
       () => {};
+  }
+
+  changeShowUpdate() {
+    this.isDialogUpdateOpen = !this.isDialogUpdateOpen;
   }
 }

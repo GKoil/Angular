@@ -9,8 +9,9 @@ import { HeaderComponent } from '@layout/header/header.component';
 import { TitleContentComponent } from '@layout/title-content/title-content.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from '@pages/home/home.component';
-import { DialogBaseComponent } from './shared/dialog-base/dialog-base.component';
-import { DialogTitleComponent } from './shared/dialog-title/dialog-title.component';
+import { DialogBaseComponent } from '@shared/dialog-base/dialog-base.component';
+import { DialogTitleComponent } from '@shared/dialog-title/dialog-title.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,13 @@ import { DialogTitleComponent } from './shared/dialog-title/dialog-title.compone
     DialogBaseComponent,
     DialogTitleComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, NgbModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
