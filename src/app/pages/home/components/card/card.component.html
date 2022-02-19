@@ -20,11 +20,7 @@
       <p><span class="text-muted">Year: </span>{{ cardInfo.year }}</p>
       <div class="d-flex gap-2">
         <button type="button" class="btn btn-secondary">Update</button>
-        <button
-          (click)="onClickRemoveCar(cardInfo.id)"
-          type="button"
-          class="btn btn-danger"
-        >
+        <button (click)="changeShow()" type="button" class="btn btn-danger">
           Delete
         </button>
       </div>
@@ -38,7 +34,13 @@
       <button (click)="changeShow()" type="button" class="btn btn-secondary">
         Cancel
       </button>
-      <button type="button" class="btn btn-danger">Delete</button>
+      <button
+        (click)="onClickRemoveCar(cardInfo.id)"
+        type="button"
+        class="btn btn-danger"
+      >
+        Delete
+      </button>
     </div>
   </app-dialog-title>
 </article>

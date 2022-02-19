@@ -2,6 +2,6 @@
   <app-card
     *ngFor="let car of cars"
     [cardInfo]="car"
-    [onClickRemove]="removeCar"
+    (removeCar)="removeCar($event)"
   ></app-card>
 </section>

@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Car } from '@services/car.type';
+import { CarsService } from '@services/cars.service';
 
 @Component({
   selector: 'app-card',
@@ -11,14 +12,23 @@ export class CardComponent {
 
   @Input() cardInfo: Car | undefined;
 
-  @Input() onClickRemove: (id: number) => void = () => {};
+  @Output() removeCar: EventEmitter<number> = new EventEmitter<number>();
+
+  constructor(private carsService: CarsService) {}
 
   changeShow = () => {
     this.isDialogOpened = !this.isDialogOpened;
   };
 
   onClickRemoveCar(id: number) {
-    this.changeShow();
-    this.onClickRemove(id);
+    this.carsService.removeCar(id).subscribe(
+      () => {},
+      () => {
+        // TODO: ошибка, хотя компонент удален
+        this.removeCar.emit(id);
+        this.changeShow();
+      }
+    ),
+      () => {};
   }
 }
