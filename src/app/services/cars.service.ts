@@ -39,17 +39,7 @@ export class CarsService {
     return this.http.delete<void>(`${Constants.URL}/cars/${id}`);
   }
 
-  changeCar(): Observable<Car> {
-    // TODO: На вход принимает CarPost
-
-    const newCar: CarPost & { id: number } = {
-      name: 'name1',
-      modelId: 1,
-      color: 'red',
-      image: 'image1',
-      year: 1,
-      id: 0,
-    };
-    return this.http.put<Car>(`${Constants.URL}/cars/`, newCar);
+  changeCar(car: CarPost & { id: number }): Observable<Car> {
+    return this.http.put<Car>(`${Constants.URL}/cars/`, car);
   }
 }

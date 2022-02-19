@@ -36,6 +36,8 @@ export class ListCarsComponent implements OnInit {
   }
 
   removeCar(carId: number) {
-    this.cars = this.cars.filter(({ id }: any) => id !== carId);
+    this.cars = this.cars.filter(({ id }) => id !== carId);
   }
+
+  updateCar(cardId: number) {}
 }

@@ -1,26 +1,62 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Car } from '@services/car.type';
 import { CarsService } from '@services/cars.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ModelType } from '@services/model.type';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
   isDialogOpened = false;
 
   isDialogUpdateOpen = false;
+
+  form: FormGroup | any; // TODO: Убрать any
+
+  formModels: ModelType[] = [];
 
   @Input() cardInfo: Car | undefined;
 
   @Output() removeCar: EventEmitter<number> = new EventEmitter<number>();
 
+  @Output() updateCar: EventEmitter<number> = new EventEmitter<number>();
+
   constructor(private carsService: CarsService) {}
+
+  ngOnInit() {
+    this.form = new FormGroup({
+      name: new FormControl(this.cardInfo?.name, [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      model: new FormControl(this.cardInfo?.model.id),
+      color: new FormControl(this.cardInfo?.color),
+      year: new FormControl(this.cardInfo?.year),
+      image: new FormControl(this.cardInfo?.image),
+    });
+  }
 
   changeShow = () => {
     this.isDialogOpened = !this.isDialogOpened;
   };
+
+  submitUpdate(id: number) {
+    console.log(this.form, 'form sbmtd');
+    this.carsService
+      .changeCar({
+        ...this.form.value,
+        id,
+        modelId: Number(this.form.value.model),
+      })
+      .subscribe((response) => {
+        console.log(response, 'response data', id, 'id');
+
+        // this.form.reset();
+      });
+  }
 
   onClickRemoveCar(id: number) {
     this.carsService.removeCar(id).subscribe(
@@ -35,6 +71,11 @@ export class CardComponent {
   }
 
   changeShowUpdate() {
+    if (this.formModels.length === 0) {
+      this.carsService.getModels().subscribe((data) => {
+        this.formModels = data;
+      });
+    }
     this.isDialogUpdateOpen = !this.isDialogUpdateOpen;
   }
 }

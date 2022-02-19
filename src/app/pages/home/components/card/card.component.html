@@ -38,11 +38,12 @@
     [title]="'Update ' + cardInfo.name"
     *ngIf="isDialogUpdateOpen"
   >
-    <form>
+    <form [formGroup]="form" (ngSubmit)="submitUpdate(cardInfo.id)">
       <div class="d-flex flex-column gap-3 mb-5">
         <div class="form-group">
           <label for="name">Name <span class="text-danger">*</span></label>
           <input
+            formControlName="name"
             type="text"
             class="form-control"
             id="name"
@@ -51,14 +52,17 @@
         </div>
         <div class="form-group">
           <label for="model">Model <span class="text-danger">*</span></label>
-          <select id="model" class="form-control">
-            <option selected>Choose...</option>
-            <option>...</option>
+          <select formControlName="model" id="model" class="form-control">
+            <option></option>
+            <option *ngFor="let formModel of formModels">
+              {{ formModel.id }}
+            </option>
           </select>
         </div>
         <div class="form-group">
           <label for="color">Color <span class="text-danger">*</span></label>
           <input
+            formControlName="color"
             type="text"
             class="form-control"
             id="color"
@@ -68,6 +72,7 @@
         <div class="form-group">
           <label for="year">Year <span class="text-danger">*</span></label>
           <input
+            formControlName="year"
             type="text"
             class="form-control"
             id="year"
@@ -77,6 +82,7 @@
         <div class="form-group">
           <label for="image">Image <span class="text-danger">*</span></label>
           <input
+            formControlName="image"
             type="file"
             class="form-control"
             id="image"
@@ -93,7 +99,9 @@
         >
           Cancel
         </button>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button [disabled]="form.invalid" type="submit" class="btn btn-primary">
+          Save
+        </button>
       </div>
     </form>
   </app-dialog-title>
