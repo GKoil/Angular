@@ -1,1 +1,3 @@
-export const url = 'http://localhost:3000';
+export class Constants {
+  public static URL = 'http://localhost:3000';
+}
