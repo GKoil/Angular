@@ -8,7 +8,7 @@ import { CarsService } from './services/cars.service';
 export class AppComponent implements OnInit {
   cars: any[] = [];
 
-  title = 'g-mate-front';
+  contentTitle = 'Cars List';
 
   constructor(private carsService: CarsService) {}
 
