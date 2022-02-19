@@ -9,6 +9,8 @@ import { HeaderComponent } from '@layout/header/header.component';
 import { TitleContentComponent } from '@layout/title-content/title-content.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from '@pages/home/home.component';
+import { DialogBaseComponent } from './shared/dialog-base/dialog-base.component';
+import { DialogTitleComponent } from './shared/dialog-title/dialog-title.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { HomeComponent } from '@pages/home/home.component';
     HeaderComponent,
     TitleContentComponent,
     HomeComponent,
+    DialogBaseComponent,
+    DialogTitleComponent,
   ],
   imports: [BrowserModule, HttpClientModule, NgbModule],
   providers: [],
