@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { CarsService } from '@services/cars.service';
+import { Car } from '@services/car.type';
 
 @Component({
   selector: 'app-list-cars',
   templateUrl: './list-cars.component.html',
-  styleUrls: ['./list-cars.component.scss']
 })
 export class ListCarsComponent implements OnInit {
+  cars: Car[] = [];
 
-  constructor() { }
+  constructor(private carsService: CarsService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    const newCars = this.carsService.getCars();
+    newCars.subscribe((response) => (this.cars = response));
   }
 
+  removeCar(carId: number) {
+    this.cars = this.cars.filter(({ id }: any) => id !== carId);
+  }
 }
