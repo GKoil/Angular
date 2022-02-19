@@ -15,14 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
     CardComponent,
     ListCarsComponent,
     HeaderComponent,
-    TitleContentComponent
+    TitleContentComponent,
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    NgbModule
-  ],
+  imports: [BrowserModule, HttpClientModule, NgbModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
