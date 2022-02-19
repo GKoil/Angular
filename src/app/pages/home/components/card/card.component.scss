@@ -1,0 +1,8 @@
+@import "src/styles/vars";
+
+.image {
+  aspect-ratio: 3 /2;
+  object-fit: cover;
+
+  background-color: $main-gray; // Если не окажется изображения
+}
