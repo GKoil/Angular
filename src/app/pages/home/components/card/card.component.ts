@@ -54,8 +54,14 @@ export class CardComponent implements OnInit {
     this.isDialogUpdateOpen = !this.isDialogUpdateOpen;
   }
 
-  onFileChanged(event: any) {
-    const file: File = event.target.files[0];
+  onFileChanged(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files?.length) {
+      return;
+    }
+
+    const file: File = input.files[0];
     this.form.patchValue({
       image: file,
     });
