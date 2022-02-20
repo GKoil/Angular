@@ -27,4 +27,8 @@ export class ListCarsComponent implements OnInit {
     // TODO: Лучше использовать lodash для копирования, не модифицируя массив
     this.cars.splice(changedCarIndex, 1, car);
   }
+
+  addCar(car: Car) {
+    this.cars = [...this.cars, car];
+  }
 }

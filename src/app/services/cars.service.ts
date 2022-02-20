@@ -22,17 +22,15 @@ export class CarsService {
     return this.http.get<ModelType[]>(`${Constants.URL}/models`);
   }
 
-  addCar(): Observable<Car> {
-    // TODO: на вход принимат Car
-    const newCar: CarPost = {
-      name: 'name1',
-      modelId: 1,
-      color: 'red',
-      image: 'image1',
-      year: 1,
-    };
+  addCar(car: CarPost): Observable<Car> {
+    const formData = new FormData();
+    formData.append('image', car.image);
+    formData.append('name', car.name);
+    formData.append('modelId', car.modelId.toString());
+    formData.append('color', car.color);
+    formData.append('year', car.year.toString());
 
-    return this.http.post<Car>(`${Constants.URL}/cars`, newCar);
+    return this.http.post<Car>(`${Constants.URL}/cars`, formData);
   }
 
   removeCar(id: number): Observable<void> {

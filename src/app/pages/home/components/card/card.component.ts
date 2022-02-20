@@ -4,11 +4,7 @@ import { CarsService } from '@services/cars.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModelType } from '@services/model.type';
 import { processingCar } from '@services/processing/processing-car';
-
-const mapIdModel = (models: ModelType[], needName: string): number => {
-  const mapObj = models.find(({ name }) => name === needName);
-  return mapObj ? mapObj.id : -1;
-};
+import mapIdModel from '@app/utils/mapIdModel';
 
 @Component({
   selector: 'app-card',

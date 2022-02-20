@@ -12,6 +12,7 @@ import { HomeComponent } from '@pages/home/home.component';
 import { DialogBaseComponent } from '@shared/dialog-base/dialog-base.component';
 import { DialogTitleComponent } from '@shared/dialog-title/dialog-title.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonAddComponent } from './pages/home/components/button-add/button-add.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     DialogBaseComponent,
     DialogTitleComponent,
+    ButtonAddComponent,
   ],
   imports: [
     BrowserModule,
