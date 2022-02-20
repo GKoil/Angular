@@ -26,8 +26,9 @@ export class ListCarsComponent implements OnInit {
   updateCar(car: Car) {
     const { id: changedId } = car;
     const changedCarIndex = this.cars.findIndex(({ id }) => id === changedId);
-    // TODO: Лучше использовать lodash для копирования, не модифицируя массив
-    this.cars.splice(changedCarIndex, 1, car);
+    const updatedCars = [...this.cars];
+    updatedCars.splice(changedCarIndex, 1, car);
+    this.cars = updatedCars;
   }
 
   addCar(car: Car) {
