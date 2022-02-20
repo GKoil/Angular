@@ -5,6 +5,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModelType } from '@services/model.type';
 import { processingCar } from '@services/processing/processing-car';
 
+const mapIdModel = (models: ModelType[], needName: string): number => {
+  const mapObj = models.find(({ name }) => name === needName);
+  return mapObj ? mapObj.id : -1;
+};
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -72,6 +77,7 @@ export class CardComponent implements OnInit {
       .changeCar({
         ...this.form.value,
         id,
+        modelId: mapIdModel(this.formModels, this.form.value.modelId),
       })
       .subscribe((response) => {
         this.updateCar.emit(processingCar(response));
