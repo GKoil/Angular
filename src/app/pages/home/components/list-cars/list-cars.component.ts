@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarsService } from '@services/cars.service';
 import { Car } from '@services/car.type';
 import { processingCar } from '@services/processing/processing-car';
+import { ModelType } from '@services/model.type';
 
 @Component({
   selector: 'app-list-cars',
@@ -10,6 +11,8 @@ import { processingCar } from '@services/processing/processing-car';
 export class ListCarsComponent implements OnInit {
   cars: Car[] = [];
 
+  formModels: ModelType[] = [];
+
   filterTerm = '';
 
   constructor(private carsService: CarsService) {}
@@ -17,6 +20,10 @@ export class ListCarsComponent implements OnInit {
   ngOnInit() {
     const newCars = this.carsService.getCars();
     newCars.subscribe((response) => (this.cars = response.map(processingCar)));
+
+    this.carsService.getModels().subscribe((data) => {
+      this.formModels = data;
+    });
   }
 
   removeCar(carId: number) {

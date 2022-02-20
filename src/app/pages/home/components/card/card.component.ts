@@ -19,9 +19,11 @@ export class CardComponent implements OnInit {
 
   form: FormGroup;
 
-  formModels: ModelType[] = [];
+  // formModels: ModelType[] = [];
 
   @Input() cardInfo: Car | undefined;
+
+  @Input() formModels: ModelType[];
 
   @Output() removeCar: EventEmitter<number> = new EventEmitter<number>();
 
@@ -48,11 +50,7 @@ export class CardComponent implements OnInit {
   }
 
   changeShowUpdateDialog() {
-    if (this.formModels.length === 0) {
-      this.carsService.getModels().subscribe((data) => {
-        this.formModels = data;
-      });
-    }
+    console.log(this.formModels, 'card models');
     this.isDialogUpdateOpen = !this.isDialogUpdateOpen;
   }
 
