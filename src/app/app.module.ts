@@ -13,7 +13,7 @@ import { DialogBaseComponent } from '@shared/dialog-base/dialog-base.component';
 import { DialogTitleComponent } from '@shared/dialog-title/dialog-title.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonAddComponent } from './pages/home/components/button-add/button-add.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SearchPipe } from './pipe/search.pipe';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     DialogBaseComponent,
     DialogTitleComponent,
     ButtonAddComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
