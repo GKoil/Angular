@@ -3,6 +3,7 @@ import { Car } from '@services/car.type';
 import { CarsService } from '@services/cars.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModelType } from '@services/model.type';
+import { processingCar } from '@services/processing/processing-car';
 
 @Component({
   selector: 'app-card',
@@ -22,7 +23,7 @@ export class CardComponent implements OnInit {
 
   @Output() removeCar: EventEmitter<number> = new EventEmitter<number>();
 
-  @Output() updateCar: EventEmitter<number> = new EventEmitter<number>();
+  @Output() updateCar: EventEmitter<Car> = new EventEmitter<Car>();
 
   constructor(private carsService: CarsService) {}
 
@@ -49,12 +50,10 @@ export class CardComponent implements OnInit {
       .changeCar({
         ...this.form.value,
         id,
-        modelId: Number(this.form.value.modelId),
       })
       .subscribe((response) => {
-        console.log(response, 'response data', id, 'id');
-
-        // this.form.reset();
+        this.updateCar.emit(processingCar(response));
+        this.isDialogUpdateOpen = !this.isDialogUpdateOpen;
       });
   }
 

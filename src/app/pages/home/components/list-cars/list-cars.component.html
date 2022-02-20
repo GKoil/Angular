@@ -3,5 +3,6 @@
     *ngFor="let car of cars"
     [cardInfo]="car"
     (removeCar)="removeCar($event)"
+    (updateCar)="updateCar($event)"
   ></app-card>
 </section>
