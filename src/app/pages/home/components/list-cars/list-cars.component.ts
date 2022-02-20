@@ -10,6 +10,8 @@ import { processingCar } from '@services/processing/processing-car';
 export class ListCarsComponent implements OnInit {
   cars: Car[] = [];
 
+  filterTerm = '';
+
   constructor(private carsService: CarsService) {}
 
   ngOnInit() {
