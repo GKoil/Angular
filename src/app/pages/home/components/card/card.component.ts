@@ -17,7 +17,7 @@ export class CardComponent implements OnInit {
 
   isDialogUpdateOpen = false;
 
-  form: FormGroup | any; // TODO: Убрать any
+  form: FormGroup;
 
   formModels: ModelType[] = [];
 

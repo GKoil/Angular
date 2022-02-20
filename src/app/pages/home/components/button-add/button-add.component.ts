@@ -13,7 +13,7 @@ import { Car } from '@services/car.type';
 export class ButtonAddComponent implements OnInit {
   isDialogUpdateOpen = false;
 
-  form: FormGroup | any; // TODO: Убрать any
+  form: FormGroup;
 
   formModels: ModelType[] = [];
 
