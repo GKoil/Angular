@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModelType } from '@services/model.type';
 import { processingCar } from '@services/processing/processing-car';
 import mapIdModel from '@app/utils/mapIdModel';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-card',
@@ -82,14 +83,20 @@ export class CardComponent implements OnInit {
   }
 
   submitRemove(id: number) {
-    this.carsService.removeCar(id).subscribe(
-      () => {},
-      () => {
-        // TODO: ошибка, хотя компонент удален
+    this.carsService.removeCar(id).subscribe({
+      next: () => {
         this.removeCar.emit(id);
         this.changeShowRemoveDialog();
-      }
-    ),
-      () => {};
+      },
+      error: (error: HttpErrorResponse) => {
+        if (error.status !== 200) {
+          // Обработка ошибки
+          return;
+        }
+
+        this.removeCar.emit(id);
+        this.changeShowRemoveDialog();
+      },
+    });
   }
 }
