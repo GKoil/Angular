@@ -40,6 +40,14 @@ export class CarsService {
   }
 
   changeCar(car: CarPost & { id: number }): Observable<Car> {
-    return this.http.put<Car>(`${Constants.URL}/cars/`, car);
+    const formData = new FormData();
+    formData.append('image', car.image);
+    formData.append('name', car.name);
+    formData.append('modelId', car.modelId.toString());
+    formData.append('color', car.color);
+    formData.append('year', car.year.toString());
+    formData.append('id', car.id.toString());
+
+    return this.http.put<Car>(`${Constants.URL}/cars/`, formData);
   }
 }

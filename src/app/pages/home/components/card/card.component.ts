@@ -32,10 +32,11 @@ export class CardComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
       ]),
-      model: new FormControl(this.cardInfo?.model.id),
+      modelId: new FormControl(this.cardInfo?.model.id),
       color: new FormControl(this.cardInfo?.color),
       year: new FormControl(this.cardInfo?.year),
-      image: new FormControl(this.cardInfo?.image),
+      imageUser: new FormControl(this.cardInfo?.image),
+      image: new FormControl(''),
     });
   }
 
@@ -44,18 +45,24 @@ export class CardComponent implements OnInit {
   };
 
   submitUpdate(id: number) {
-    console.log(this.form, 'form sbmtd');
     this.carsService
       .changeCar({
         ...this.form.value,
         id,
-        modelId: Number(this.form.value.model),
+        modelId: Number(this.form.value.modelId),
       })
       .subscribe((response) => {
         console.log(response, 'response data', id, 'id');
 
         // this.form.reset();
       });
+  }
+
+  onFileChanged(event: any) {
+    const file: File = event.target.files[0];
+    this.form.patchValue({
+      image: file,
+    });
   }
 
   onClickRemoveCar(id: number) {
