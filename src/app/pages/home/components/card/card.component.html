@@ -1,22 +1,132 @@
-<article class="col">
+<div *ngIf="!cardInfo">Не получилось загрузить</div>
+
+<article *ngIf="cardInfo" class="col">
   <div class="card shadow-sm">
-    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-         role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-      <title>Placeholder</title>
-      <rect width="100%" height="100%" fill="#55595c"></rect>
-      <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-    </svg>
+    <img
+      class="image bd-placeholder-img card-img-top"
+      width="100%"
+      height="225"
+      [src]="cardInfo.image"
+      alt="Изображение автомобиля {{ cardInfo.name }}"
+    />
 
     <div class="card-body">
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-        content. This content is a little bit longer.</p>
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-        </div>
-        <small class="text-muted">9 mins</small>
+      <h4 class="card-text">{{ cardInfo.name }}</h4>
+      <p>
+        <span class="text-muted">Model: </span>
+        {{ cardInfo.model.name }}
+      </p>
+      <p><span class="text-muted">Color: </span>{{ cardInfo.color }}</p>
+      <p><span class="text-muted">Year: </span>{{ cardInfo.year }}</p>
+      <div class="d-flex gap-2">
+        <button
+          (click)="changeShowUpdateDialog()"
+          type="button"
+          class="btn btn-secondary"
+        >
+          Update
+        </button>
+        <button
+          (click)="changeShowRemoveDialog()"
+          type="button"
+          class="btn btn-danger"
+        >
+          Delete
+        </button>
       </div>
     </div>
   </div>
+
+  <app-dialog-title
+    [title]="'Update ' + cardInfo.name"
+    *ngIf="isDialogUpdateOpen"
+  >
+    <form [formGroup]="form" (ngSubmit)="submitUpdate(cardInfo.id)">
+      <div class="d-flex flex-column gap-3 mb-5">
+        <div class="form-group">
+          <label for="name">Name <span class="text-danger">*</span></label>
+          <input
+            formControlName="name"
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Enter name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="modelId">Model <span class="text-danger">*</span></label>
+          <select formControlName="modelId" id="modelId" class="form-control">
+            <option></option>
+            <option *ngFor="let formModel of formModels">
+              {{ formModel.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="color">Color <span class="text-danger">*</span></label>
+          <input
+            formControlName="color"
+            type="text"
+            class="form-control"
+            id="color"
+            placeholder="Enter color"
+          />
+        </div>
+        <div class="form-group">
+          <label for="year">Year <span class="text-danger">*</span></label>
+          <input
+            formControlName="year"
+            type="text"
+            class="form-control"
+            id="year"
+            placeholder="Enter year"
+          />
+        </div>
+        <div class="form-group">
+          <label for="image">Image <span class="text-danger">*</span></label>
+          <input
+            (change)="onFileChanged($event)"
+            formControlName="imageUser"
+            type="file"
+            class="form-control"
+            id="image"
+            placeholder="Enter image"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex gap-2 justify-content-end">
+        <button
+          (click)="changeShowUpdateDialog()"
+          type="button"
+          class="btn btn-secondary"
+        >
+          Cancel
+        </button>
+        <button [disabled]="form.invalid" type="submit" class="btn btn-primary">
+          Save
+        </button>
+      </div>
+    </form>
+  </app-dialog-title>
+
+  <app-dialog-title [title]="'Delete ' + cardInfo.name" *ngIf="isDialogOpened">
+    <p>Are you sure you want to delete this car?</p>
+    <div class="d-flex gap-2">
+      <button
+        (click)="changeShowRemoveDialog()"
+        type="button"
+        class="btn btn-secondary"
+      >
+        Cancel
+      </button>
+      <button
+        (click)="submitRemove(cardInfo.id)"
+        type="button"
+        class="btn btn-danger"
+      >
+        Delete
+      </button>
+    </div>
+  </app-dialog-title>
 </article>

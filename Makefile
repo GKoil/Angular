@@ -1,11 +1,11 @@
 install:
 	npm i
 
-backend:
+server:
 	cd ./backend/ && npm run start
 
 serve:
 	npx ng serve -o
 
 start:
-	npx concurrently "make backend" "make serve"
+	npx concurrently "make server" "make serve"
