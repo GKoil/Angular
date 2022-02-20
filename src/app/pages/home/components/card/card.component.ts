@@ -41,20 +41,17 @@ export class CardComponent implements OnInit {
     });
   }
 
-  changeShow = () => {
+  changeShowRemoveDialog() {
     this.isDialogOpened = !this.isDialogOpened;
-  };
+  }
 
-  submitUpdate(id: number) {
-    this.carsService
-      .changeCar({
-        ...this.form.value,
-        id,
-      })
-      .subscribe((response) => {
-        this.updateCar.emit(processingCar(response));
-        this.isDialogUpdateOpen = !this.isDialogUpdateOpen;
+  changeShowUpdateDialog() {
+    if (this.formModels.length === 0) {
+      this.carsService.getModels().subscribe((data) => {
+        this.formModels = data;
       });
+    }
+    this.isDialogUpdateOpen = !this.isDialogUpdateOpen;
   }
 
   onFileChanged(event: any) {
@@ -64,24 +61,27 @@ export class CardComponent implements OnInit {
     });
   }
 
-  onClickRemoveCar(id: number) {
+  submitUpdate(id: number) {
+    this.carsService
+      .changeCar({
+        ...this.form.value,
+        id,
+      })
+      .subscribe((response) => {
+        this.updateCar.emit(processingCar(response));
+        this.changeShowUpdateDialog();
+      });
+  }
+
+  submitRemove(id: number) {
     this.carsService.removeCar(id).subscribe(
       () => {},
       () => {
         // TODO: ошибка, хотя компонент удален
         this.removeCar.emit(id);
-        this.changeShow();
+        this.changeShowRemoveDialog();
       }
     ),
       () => {};
-  }
-
-  changeShowUpdate() {
-    if (this.formModels.length === 0) {
-      this.carsService.getModels().subscribe((data) => {
-        this.formModels = data;
-      });
-    }
-    this.isDialogUpdateOpen = !this.isDialogUpdateOpen;
   }
 }
